@@ -113,3 +113,33 @@ class Node(object):
         if recursive:
             for child in self.children:
                 child.reset_value()
+
+
+class Variable(Node):
+    """
+    变量节点
+    """
+
+    def __init__(self, dim, init=False, trainable=True, **kargs):
+        """
+        变量节点没有父节点，构造函数接受变量的形状，是否初始化以及是否参与训练的标识
+        """
+        Node.__init__(self, **kargs)
+        self.dim = dim
+
+        # 如果需要初始化，则以正态分布随机初始化变量的值
+        if init:
+            self.value = np.mat(np.random.normal(0, 0.001, self.dim))
+
+        # 变量节点是否参与训练
+        self.trainable = trainable
+
+    def set_value(self, value):
+        """
+        为变量赋值
+        """
+        assert isinstance(value, np.matrix) and value.shape == self.dim
+
+        # 本节点的值被改变，重置所有下游节点的值
+        self.reset_value()
+        self.value = value
