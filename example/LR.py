@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # @Time : 2020/12/20 9:57 下午
 # @Author : huichuan LI
-# @File : adaline.py
+# @File : LR.py
 # @Software: PyCharm
 
 import sys
