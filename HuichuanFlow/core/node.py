@@ -7,6 +7,7 @@
 import abc
 
 import numpy as np
+from .graph import Graph, default_graph
 
 
 class Node(object):
@@ -30,6 +31,9 @@ class Node(object):
         for parent in self.parents:
             parent.children.append(self)
 
+        # 将本节点添加到计算图中
+        self.graph.add_node(self)
+
     def get_parents(self):
         """
         获取本节点的父节点
@@ -51,6 +55,12 @@ class Node(object):
                 node.forward()
 
         self.compute()
+
+    def dimension(self):
+        """
+        返回本节点的值展平成向量后的维数
+        """
+        return self.value.shape[0] * self.value.shape[1]
 
     def gen_node_name(self, **kargs):
         """
