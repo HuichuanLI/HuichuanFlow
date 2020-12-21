@@ -110,3 +110,26 @@ class Optimizer(object):
                     self.acc_gradient[node] = gradient
                 else:
                     self.acc_gradient[node] += gradient
+
+
+class GradientDescent(Optimizer):
+    """
+    梯度下降优化器
+    """
+
+    def __init__(self, graph, target, learning_rate=0.01):
+
+        Optimizer.__init__(self, graph, target)
+        self.learning_rate = learning_rate
+
+    def _update(self):
+        """
+        朴素梯度下降法
+        """
+        for node in self.graph.nodes:
+            if isinstance(node, Variable) and node.trainable:
+                # 取得该节点在当前批的平均梯度
+                gradient = self.get_gradient(node)
+
+                # 用朴素梯度下降法更新变量节点的值
+                node.set_value(node.value - self.learning_rate * gradient)
