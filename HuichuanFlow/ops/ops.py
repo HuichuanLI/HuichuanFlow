@@ -31,7 +31,6 @@ class Operator(node.Node):
     pass
 
 
-
 class MatMul(Operator):
     """
         矩阵乘法
@@ -83,3 +82,18 @@ class Add(Operator):
 
     def get_jacobi(self, parent):
         return np.mat(np.eye(self.dimension()))  # 矩阵之和对其中任一个矩阵的雅可比矩阵是单位矩阵
+
+
+class Logistic(Operator):
+    """
+    对向量的分量施加Logistic函数
+    """
+
+    def compute(self):
+        x = self.parents[0].value
+        # 对父节点的每个分量施加Logistic
+        self.value = np.mat(
+            1.0 / (1.0 + np.power(np.e, np.where(-x > 1e2, 1e2, -x))))
+
+    def get_jacobi(self, parent):
+        return np.diag(np.mat(np.multiply(self.value, 1 - self.value)).A1)
