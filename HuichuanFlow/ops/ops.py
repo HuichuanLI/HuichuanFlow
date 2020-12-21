@@ -119,3 +119,21 @@ class SoftMax(Operator):
         训练时使用CrossEntropyWithSoftMax节点
         """
         raise NotImplementedError("Don't use SoftMax's get_jacobi")
+
+
+class ReLU(Operator):
+    """
+    对矩阵的元素施加ReLU函数
+    """
+
+    nslope = 0.1  # 负半轴的斜率
+
+    def compute(self):
+        self.value = np.mat(np.where(
+            self.parents[0].value > 0.0,
+            self.parents[0].value,
+            self.nslope * self.parents[0].value)
+        )
+
+    def get_jacobi(self, parent):
+        return np.diag(np.where(self.parents[0].value.A1 > 0.0, 1.0, self.nslope))
