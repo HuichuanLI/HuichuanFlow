@@ -6,3 +6,5 @@ HuichuanFlow/__pycache__/
 HuichuanFlow/core/__pycache__/
 
 HuichuanFlow/ops/__pycache__/
+
+HuichuanFlow/optimizer/__pycache__/
