@@ -56,8 +56,8 @@ loss = hf.ops.loss.PerceptionLoss(hf.ops.MatMul(label, output))
 learning_rate = 0.01
 
 # 使用各种优化器
-optimizer = hf.optimizer.GradientDescent(hf.default_graph, loss, learning_rate)
-# optimizer = ms.optimizer.Momentum(ms.default_graph, loss, learning_rate)
+# optimizer = hf.optimizer.GradientDescent(hf.default_graph, loss, learning_rate)
+optimizer = hf.optimizer.Momentum(hf.default_graph, loss, learning_rate)
 # optimizer = ms.optimizer.AdaGrad(ms.default_graph, loss, learning_rate)
 # optimizer = ms.optimizer.RMSProp(ms.default_graph, loss, learning_rate)
 # optimizer = ms.optimizer.Adam(ms.default_graph, loss, learning_rate)

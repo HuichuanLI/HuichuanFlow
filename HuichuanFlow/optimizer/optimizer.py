@@ -133,3 +133,34 @@ class GradientDescent(Optimizer):
 
                 # 用朴素梯度下降法更新变量节点的值
                 node.set_value(node.value - self.learning_rate * gradient)
+
+
+class Momentum(Optimizer):
+    """
+    动量法
+    """
+
+    def __init__(self, graph, target, learning_rate=0.01, momentum=0.9):
+        Optimizer.__init__(self, graph, target)
+
+        self.learning_rate = learning_rate
+
+        # 衰减系数，默认为0.9
+        self.momentum = momentum
+
+        # 积累历史速度的字典
+        self.v = dict()
+
+    def _update(self):
+        for node in self.graph.nodes:
+            if isinstance(node, Variable) and node.trainable:
+                # 取得该节点在当前批的平均梯度
+                gradient = self.get_gradient(node)
+                if node not in self.v:
+                    self.v[node] = gradient
+                else:
+                    # 滑动平均累积历史速度
+                    self.v[node] = self.momentum * self.v[node] \
+                                   - self.learning_rate * gradient
+                # 更新变量节点的值
+                node.set_value(node.value + self.v[node])
