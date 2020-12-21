@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # @Time : 2020/12/20 9:57 下午
 # @Author : huichuan LI
-# @File : LR.py
+# @File : SVM.py
 # @Software: PyCharm
 
 import sys
@@ -59,7 +59,7 @@ predict = hf.ops.Step(output)
 loss = hf.ops.loss.PerceptionLoss(hf.ops.MatMul(label, output))
 
 # 学习率
-learning_rate = 0.0001
+learning_rate = 0.00001
 
 # 训练执行50个epoch
 for epoch in range(50):
