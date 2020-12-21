@@ -7,7 +7,7 @@
 
 我在代码中写了尽量详细的注释，通过阅读源码亦能理解这个“麻雀虽小五脏俱全”的框架，并从中学习和理解机器学习背后的原理。
 
-著名物理学家，诺贝尔奖得主[Richard Feynman](https://en.wikipedia.org/wiki/Richard_Feynman)办公室的黑板上写了："What I cannot create, I do not understand."，即“我不能建造的，我便无法理解”，MatrixSlow和本书，算是我们对伟大科学先哲思想的一次小小的践行。
+著名物理学家，诺贝尔奖得主[Richard Feynman](https://en.wikipedia.org/wiki/Richard_Feynman)办公室的黑板上写了："What I cannot create, I do not understand."。
 
 ### 特性
 
