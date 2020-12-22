@@ -137,3 +137,53 @@ class ReLU(Operator):
 
     def get_jacobi(self, parent):
         return np.diag(np.where(self.parents[0].value.A1 > 0.0, 1.0, self.nslope))
+
+
+class Reshape(Operator):
+    """
+    改变父节点的值（矩阵）的形状
+    """
+
+    def __init__(self, *parent, **kargs):
+        Operator.__init__(self, *parent, **kargs)
+
+        self.to_shape = kargs.get('shape')
+        assert isinstance(self.to_shape, tuple) and len(self.to_shape) == 2
+
+    def compute(self):
+        self.value = self.parents[0].value.reshape(self.to_shape)
+
+    def get_jacobi(self, parent):
+        assert parent is self.parents[0]
+        return np.mat(np.eye(self.dimension()))
+
+
+class Concat(Operator):
+    """
+    将多个父节点的值连接成向量
+    """
+
+    def compute(self):
+        assert len(self.parents) > 0
+
+        # 将所有父节点矩阵展平并连接成一个向量
+        self.value = np.concatenate(
+            [p.value.flatten() for p in self.parents],
+            axis=1
+        ).T
+
+    def get_jacobi(self, parent):
+        assert parent in self.parents
+
+        dimensions = [p.dimension() for p in self.parents]  # 各个父节点的元素数量
+        pos = self.parents.index(parent)  # 当前是第几个父节点
+        dimension = parent.dimension()  # 当前父节点的元素数量
+
+        assert dimension == dimensions[pos]
+
+        jacobi = np.mat(np.zeros((self.dimension(), dimension)))
+        start_row = int(np.sum(dimensions[:pos]))
+        jacobi[start_row:start_row + dimension,
+        0:dimension] = np.eye(dimension)
+
+        return jacobi
