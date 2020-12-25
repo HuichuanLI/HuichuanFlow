@@ -8,8 +8,6 @@ import time
 
 import numpy as np
 
-from ..core import Variable, default_graph
-
 
 class Trainer(object):
     '''
@@ -78,6 +76,7 @@ class Trainer(object):
             self.train(train_x, train_y)
 
             # 如果需要，对模型进行评估
+
             if self.eval_on_train and test_x is not None and test_y is not None:
                 self.eval(test_x, test_y)
 
