@@ -203,3 +203,30 @@ class Multiply(Operator):
             return np.diag(self.parents[1].value.A1)
         else:
             return np.diag(self.parents[0].value.A1)
+
+
+class Welding(Operator):
+
+    def compute(self):
+        assert len(self.parents) == 1 and self.parents[0] is not None
+        self.value = self.parents[0].value
+
+    def get_jacobi(self, parent):
+        assert parent is self.parents[0]
+        return np.mat(np.eye(self.dimension()))
+
+    def weld(self, node):
+        """
+        将本节点焊接到输入节点上
+        """
+
+        # 首先与之前的父节点断开
+
+        if len(self.parents) == 1 and self.parents[0] is not None:
+            self.parents[0].children.remove(self)
+
+        self.parents.clear()
+
+        # 与输入节点焊接
+        self.parents.append(node)
+        node.children.append(self)
