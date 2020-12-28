@@ -15,7 +15,7 @@ from ..core.graph import default_graph
 from ..ops import *
 from ..ops.loss import *
 from ..ops.metrics import *
-
+from ..util.util import *
 from ..core.core import get_node_from_graph
 
 
