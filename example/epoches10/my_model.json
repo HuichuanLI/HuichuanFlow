@@ -1,0 +1,482 @@
+{
+    "meta": {
+        "save_time": "2020-12-28 20:16:20.108314",
+        "weights_file_name": "my_weights.npz"
+    },
+    "service": {},
+    "graph": [
+        {
+            "node_type": "Variable",
+            "name": "Variable:0",
+            "parents": [],
+            "children": [
+                "MatMul:10"
+            ],
+            "kargs": {},
+            "dim": [
+                13,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:1",
+            "parents": [],
+            "children": [
+                "MatMul:11"
+            ],
+            "kargs": {},
+            "dim": [
+                3,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:2",
+            "parents": [],
+            "children": [
+                "MatMul:12"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:3",
+            "parents": [],
+            "children": [
+                "MatMul:13"
+            ],
+            "kargs": {},
+            "dim": [
+                4,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:4",
+            "parents": [],
+            "children": [
+                "Multiply:31",
+                "Accuracy:33",
+                "Precision:34",
+                "Recall:35",
+                "ROC_AUC:36",
+                "ROC:37"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:5",
+            "parents": [],
+            "children": [
+                "MatMul:10"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                13
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:6",
+            "parents": [],
+            "children": [
+                "MatMul:11"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                3
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:7",
+            "parents": [],
+            "children": [
+                "MatMul:12"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                2
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:8",
+            "parents": [],
+            "children": [
+                "MatMul:13"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                4
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:9",
+            "parents": [],
+            "children": [
+                "Add:29"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:10",
+            "parents": [
+                "Variable:5",
+                "Variable:0"
+            ],
+            "children": [
+                "Add:29"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:11",
+            "parents": [
+                "Variable:6",
+                "Variable:1"
+            ],
+            "children": [
+                "Concat:14"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:12",
+            "parents": [
+                "Variable:7",
+                "Variable:2"
+            ],
+            "children": [
+                "Concat:14"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:13",
+            "parents": [
+                "Variable:8",
+                "Variable:3"
+            ],
+            "children": [
+                "Concat:14"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                1
+            ]
+        },
+        {
+            "node_type": "Concat",
+            "name": "Concat:14",
+            "parents": [
+                "MatMul:11",
+                "MatMul:12",
+                "MatMul:13"
+            ],
+            "children": [
+                "MatMul:17"
+            ],
+            "kargs": {},
+            "dim": [
+                6,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:15",
+            "parents": [],
+            "children": [
+                "MatMul:17"
+            ],
+            "kargs": {},
+            "dim": [
+                8,
+                6
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:16",
+            "parents": [],
+            "children": [
+                "Add:18"
+            ],
+            "kargs": {},
+            "dim": [
+                8,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:17",
+            "parents": [
+                "Variable:15",
+                "Concat:14"
+            ],
+            "children": [
+                "Add:18"
+            ],
+            "kargs": {},
+            "dim": [
+                8,
+                1
+            ]
+        },
+        {
+            "node_type": "Add",
+            "name": "Add:18",
+            "parents": [
+                "MatMul:17",
+                "Variable:16"
+            ],
+            "children": [
+                "ReLU:19"
+            ],
+            "kargs": {},
+            "dim": [
+                8,
+                1
+            ]
+        },
+        {
+            "node_type": "ReLU",
+            "name": "ReLU:19",
+            "parents": [
+                "Add:18"
+            ],
+            "children": [
+                "MatMul:22"
+            ],
+            "kargs": {},
+            "dim": [
+                8,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:20",
+            "parents": [],
+            "children": [
+                "MatMul:22"
+            ],
+            "kargs": {},
+            "dim": [
+                4,
+                8
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:21",
+            "parents": [],
+            "children": [
+                "Add:23"
+            ],
+            "kargs": {},
+            "dim": [
+                4,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:22",
+            "parents": [
+                "Variable:20",
+                "ReLU:19"
+            ],
+            "children": [
+                "Add:23"
+            ],
+            "kargs": {},
+            "dim": [
+                4,
+                1
+            ]
+        },
+        {
+            "node_type": "Add",
+            "name": "Add:23",
+            "parents": [
+                "MatMul:22",
+                "Variable:21"
+            ],
+            "children": [
+                "ReLU:24"
+            ],
+            "kargs": {},
+            "dim": [
+                4,
+                1
+            ]
+        },
+        {
+            "node_type": "ReLU",
+            "name": "ReLU:24",
+            "parents": [
+                "Add:23"
+            ],
+            "children": [
+                "MatMul:27"
+            ],
+            "kargs": {},
+            "dim": [
+                4,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:25",
+            "parents": [],
+            "children": [
+                "MatMul:27"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                4
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:26",
+            "parents": [],
+            "children": [
+                "Add:28"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:27",
+            "parents": [
+                "Variable:25",
+                "ReLU:24"
+            ],
+            "children": [
+                "Add:28"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Add",
+            "name": "Add:28",
+            "parents": [
+                "MatMul:27",
+                "Variable:26"
+            ],
+            "children": [
+                "Add:29"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Add",
+            "name": "Add:29",
+            "parents": [
+                "MatMul:10",
+                "Add:28",
+                "Variable:9"
+            ],
+            "children": [
+                "Logistic:30",
+                "Multiply:31",
+                "Accuracy:33",
+                "Precision:34",
+                "Recall:35",
+                "ROC_AUC:36",
+                "ROC:37"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Logistic",
+            "name": "Logistic:30",
+            "parents": [
+                "Add:29"
+            ],
+            "children": [],
+            "kargs": {}
+        },
+        {
+            "node_type": "Multiply",
+            "name": "Multiply:31",
+            "parents": [
+                "Variable:4",
+                "Add:29"
+            ],
+            "children": [
+                "LogLoss:32"
+            ],
+            "kargs": {}
+        },
+        {
+            "node_type": "LogLoss",
+            "name": "LogLoss:32",
+            "parents": [
+                "Multiply:31"
+            ],
+            "children": [],
+            "kargs": {}
+        }
+    ]
+}
