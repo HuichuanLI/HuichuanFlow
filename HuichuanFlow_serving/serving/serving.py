@@ -16,7 +16,7 @@ import HuichuanFlow as hf
 from HuichuanFlow_serving.serving.proto import serving_pb2_grpc
 from HuichuanFlow_serving.serving.proto.serving_pb2_grpc import HuichuanFlowServingServicer
 
-from .proto import serving_pb2
+from HuichuanFlow_serving.serving.proto  import serving_pb2
 
 class HuichuanFlowServingService(HuichuanFlowServingServicer):
     '''

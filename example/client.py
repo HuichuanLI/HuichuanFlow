@@ -13,7 +13,7 @@ import grpc
 
 # 获取同心圆状分布的数据，X的每行包含两个特征，y是1/0类别标签
 X, y = make_circles(200, noise=0.1, factor=0.2)
-y = y * 2 - 1  # 将标签转化为1/-1
+y = y  # 将标签转化为1/-1
 import HuichuanFlow_serving as mss
 from HuichuanFlow_serving.serving import serving_pb2_grpc
 
@@ -55,4 +55,4 @@ for index in range(len(X)):
     pred = np.argmax(resp_mat_list[0])
     gt = label
     print('model predict {} and ground truth: {}'.format(
-        np.argmax(pred.value), gt))
+        np.argmax(pred), gt))
