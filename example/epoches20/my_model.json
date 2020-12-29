@@ -1,0 +1,144 @@
+{
+    "meta": {
+        "save_time": "2020-12-29 20:48:52.135065",
+        "weights_file_name": "my_weights.npz"
+    },
+    "service": {
+        "inputs": {
+            "name": "Variable:0"
+        },
+        "outputs": {
+            "name": "Logistic:6"
+        }
+    },
+    "graph": [
+        {
+            "node_type": "Variable",
+            "name": "Variable:0",
+            "parents": [],
+            "children": [
+                "MatMul:4"
+            ],
+            "kargs": {},
+            "dim": [
+                2,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:1",
+            "parents": [],
+            "children": [
+                "MatMul:7",
+                "Accuracy:9",
+                "Precision:10",
+                "Recall:11",
+                "ROC_AUC:12"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:2",
+            "parents": [],
+            "children": [
+                "Add:5"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Variable",
+            "name": "Variable:3",
+            "parents": [],
+            "children": [
+                "MatMul:4"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                2
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:4",
+            "parents": [
+                "Variable:3",
+                "Variable:0"
+            ],
+            "children": [
+                "Add:5"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Add",
+            "name": "Add:5",
+            "parents": [
+                "MatMul:4",
+                "Variable:2"
+            ],
+            "children": [
+                "Logistic:6",
+                "MatMul:7"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "Logistic",
+            "name": "Logistic:6",
+            "parents": [
+                "Add:5"
+            ],
+            "children": [
+                "Accuracy:9",
+                "Precision:10",
+                "Recall:11",
+                "ROC_AUC:12"
+            ],
+            "kargs": {},
+            "dim": [
+                1,
+                1
+            ]
+        },
+        {
+            "node_type": "MatMul",
+            "name": "MatMul:7",
+            "parents": [
+                "Variable:1",
+                "Add:5"
+            ],
+            "children": [
+                "LogLoss:8"
+            ],
+            "kargs": {}
+        },
+        {
+            "node_type": "LogLoss",
+            "name": "LogLoss:8",
+            "parents": [
+                "MatMul:7"
+            ],
+            "children": [],
+            "kargs": {}
+        }
+    ]
+}

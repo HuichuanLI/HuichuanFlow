@@ -3,3 +3,6 @@
 # @Author : huichuan LI
 # @File : __init__.py.py
 # @Software: PyCharm
+
+from .serving import *
+from .proto import *

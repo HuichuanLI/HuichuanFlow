@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package HuichuanFlow.serving;
+package HuichuanFlow_serving;
 
-service MatrixSlowServing {
+service HuichuanFlowServing {
     rpc Predict(PredictReq) returns (PredictResp) {}
 }
 

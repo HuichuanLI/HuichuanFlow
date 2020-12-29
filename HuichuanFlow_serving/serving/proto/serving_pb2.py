@@ -15,11 +15,11 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='serving.proto',
-  package='HuichuanFlow.serving',
+  package='HuichuanFlow_serving',
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rserving.proto\x12\x14HuichuanFlow.serving\"$\n\x06Matrix\x12\r\n\x05value\x18\x01 \x03(\x02\x12\x0b\n\x03\x64im\x18\x02 \x03(\x05\"8\n\nPredictReq\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.HuichuanFlow.serving.Matrix\"9\n\x0bPredictResp\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.HuichuanFlow.serving.Matrix2e\n\x11MatrixSlowServing\x12P\n\x07Predict\x12 .HuichuanFlow.serving.PredictReq\x1a!.HuichuanFlow.serving.PredictResp\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\rserving.proto\x12\x14HuichuanFlow_serving\"$\n\x06Matrix\x12\r\n\x05value\x18\x01 \x03(\x02\x12\x0b\n\x03\x64im\x18\x02 \x03(\x05\"8\n\nPredictReq\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.HuichuanFlow_serving.Matrix\"9\n\x0bPredictResp\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.HuichuanFlow_serving.Matrix2g\n\x13HuichuanFlowServing\x12P\n\x07Predict\x12 .HuichuanFlow_serving.PredictReq\x1a!.HuichuanFlow_serving.PredictResp\"\x00\x62\x06proto3'
 )
 
 
@@ -27,21 +27,21 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _MATRIX = _descriptor.Descriptor(
   name='Matrix',
-  full_name='HuichuanFlow.serving.Matrix',
+  full_name='HuichuanFlow_serving.Matrix',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='HuichuanFlow.serving.Matrix.value', index=0,
+      name='value', full_name='HuichuanFlow_serving.Matrix.value', index=0,
       number=1, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='dim', full_name='HuichuanFlow.serving.Matrix.dim', index=1,
+      name='dim', full_name='HuichuanFlow_serving.Matrix.dim', index=1,
       number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -66,14 +66,14 @@ _MATRIX = _descriptor.Descriptor(
 
 _PREDICTREQ = _descriptor.Descriptor(
   name='PredictReq',
-  full_name='HuichuanFlow.serving.PredictReq',
+  full_name='HuichuanFlow_serving.PredictReq',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='data', full_name='HuichuanFlow.serving.PredictReq.data', index=0,
+      name='data', full_name='HuichuanFlow_serving.PredictReq.data', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -98,14 +98,14 @@ _PREDICTREQ = _descriptor.Descriptor(
 
 _PREDICTRESP = _descriptor.Descriptor(
   name='PredictResp',
-  full_name='HuichuanFlow.serving.PredictResp',
+  full_name='HuichuanFlow_serving.PredictResp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='data', full_name='HuichuanFlow.serving.PredictResp.data', index=0,
+      name='data', full_name='HuichuanFlow_serving.PredictResp.data', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -137,39 +137,39 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 Matrix = _reflection.GeneratedProtocolMessageType('Matrix', (_message.Message,), {
   'DESCRIPTOR' : _MATRIX,
   '__module__' : 'serving_pb2'
-  # @@protoc_insertion_point(class_scope:HuichuanFlow.serving.Matrix)
+  # @@protoc_insertion_point(class_scope:HuichuanFlow_serving.Matrix)
   })
 _sym_db.RegisterMessage(Matrix)
 
 PredictReq = _reflection.GeneratedProtocolMessageType('PredictReq', (_message.Message,), {
   'DESCRIPTOR' : _PREDICTREQ,
   '__module__' : 'serving_pb2'
-  # @@protoc_insertion_point(class_scope:HuichuanFlow.serving.PredictReq)
+  # @@protoc_insertion_point(class_scope:HuichuanFlow_serving.PredictReq)
   })
 _sym_db.RegisterMessage(PredictReq)
 
 PredictResp = _reflection.GeneratedProtocolMessageType('PredictResp', (_message.Message,), {
   'DESCRIPTOR' : _PREDICTRESP,
   '__module__' : 'serving_pb2'
-  # @@protoc_insertion_point(class_scope:HuichuanFlow.serving.PredictResp)
+  # @@protoc_insertion_point(class_scope:HuichuanFlow_serving.PredictResp)
   })
 _sym_db.RegisterMessage(PredictResp)
 
 
 
-_MATRIXSLOWSERVING = _descriptor.ServiceDescriptor(
-  name='MatrixSlowServing',
-  full_name='HuichuanFlow.serving.MatrixSlowServing',
+_HUICHUANFLOWSERVING = _descriptor.ServiceDescriptor(
+  name='HuichuanFlowServing',
+  full_name='HuichuanFlow_serving.HuichuanFlowServing',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
   serialized_start=194,
-  serialized_end=295,
+  serialized_end=297,
   methods=[
   _descriptor.MethodDescriptor(
     name='Predict',
-    full_name='HuichuanFlow.serving.MatrixSlowServing.Predict',
+    full_name='HuichuanFlow_serving.HuichuanFlowServing.Predict',
     index=0,
     containing_service=None,
     input_type=_PREDICTREQ,
@@ -178,8 +178,8 @@ _MATRIXSLOWSERVING = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_MATRIXSLOWSERVING)
+_sym_db.RegisterServiceDescriptor(_HUICHUANFLOWSERVING)
 
-DESCRIPTOR.services_by_name['MatrixSlowServing'] = _MATRIXSLOWSERVING
+DESCRIPTOR.services_by_name['HuichuanFlowServing'] = _HUICHUANFLOWSERVING
 
 # @@protoc_insertion_point(module_scope)

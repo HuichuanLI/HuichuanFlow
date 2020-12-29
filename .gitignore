@@ -10,3 +10,11 @@ HuichuanFlow/ops/__pycache__/
 HuichuanFlow/optimizer/__pycache__/
 
 HuichuanFlow/layer/__pycache__/
+
+HuichuanFlow_serving/exporter/__pycache__/
+
+HuichuanFlow_serving/__pycache__/
+
+HuichuanFlow_serving/serving/__pycache__/
+
+HuichuanFlow_serving/serving/proto/__pycache__/
