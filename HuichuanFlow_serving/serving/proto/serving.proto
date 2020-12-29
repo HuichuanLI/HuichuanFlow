@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package HuichuanFlow.serving;
+
+service MatrixSlowServing {
+    rpc Predict(PredictReq) returns (PredictResp) {}
+}
+
+message Matrix {
+    repeated float value = 1;
+    repeated int32 dim = 2;
+}
+
+message PredictReq {
+    repeated Matrix data = 1;
+}
+
+message PredictResp {
+    repeated Matrix data = 1;
+}
