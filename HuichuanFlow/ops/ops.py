@@ -230,3 +230,65 @@ class Welding(Operator):
         # 与输入节点焊接
         self.parents.append(node)
         node.children.append(self)
+
+
+class Convolve(Operator):
+    """
+    以第二个父节点的值为滤波器，对第一个父节点的值做二维离散卷积
+    """
+
+    def __init__(self, *parents, **kargs):
+        assert len(parents) == 2
+        Operator.__init__(self, *parents, **kargs)
+
+        self.padded = None
+
+    def compute(self):
+        data = self.parents[0].value  # 图像
+        kernel = self.parents[1].value  # 滤波器
+
+        w, h = data.shape  # 图像的宽和高
+        kw, kh = kernel.shape  # 滤波器尺寸
+        hkw, hkh = int(kw / 2), int(kh / 2)  # 滤波器长宽的一半
+        # 补齐数据边缘
+
+        pw, ph = tuple(np.add(data.shape, np.multiply((hkw, hkh), 2)))
+        self.padded = np.mat(np.zeros((pw, ph)))
+        self.padded[hkw:hkw + w, hkh:hkh + h] = data
+        self.value = np.mat(np.zeros((w, h)))
+
+        # 二维离散卷积
+        for i in np.arange(hkw, hkw + w):
+            for j in np.arange(hkh, hkh + h):
+                self.value[i - hkw, j - hkh] = np.sum(
+                    np.multiply(self.padded[i - hkw:i - hkw + kw, j - hkh:j - hkh + kh], kernel))
+
+    def get_jacobi(self, parent):
+
+        data = self.parents[0].value  # 图像
+        kernel = self.parents[1].value  # 滤波器
+
+        w, h = data.shape  # 图像的宽和高
+        kw, kh = kernel.shape  # 滤波器尺寸
+        hkw, hkh = int(kw / 2), int(kh / 2)  # 滤波器长宽的一半
+
+        # 补齐数据边缘
+        pw, ph = tuple(np.add(data.shape, np.multiply((hkw, hkh), 2)))
+
+        jacobi = []
+
+        if parent is self.parents[0]:
+            for i in np.arange(hkw, hkw + w):
+                for j in np.arange(hkh, hkh + h):
+                    mask = np.mat(np.zeros((pw, ph)))
+                    mask[i - hkw:i - hkw + kw, j - hkh:j - hkh + kh] = kernel
+                    jacobi.append(mask[hkw:hkw + w, hkh:hkh + h].A1)
+        elif parent is self.parents[1]:
+            for i in np.arange(hkw, hkw + w):
+                for j in np.arange(hkh, hkh + h):
+                    jacobi.append(
+                        self.padded[i - hkw:i - hkw + kw, j - hkh:j - hkh + kh].A1)
+        else:
+            raise Exception("You're not my father")
+
+        return np.mat(jacobi)

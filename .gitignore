@@ -18,3 +18,5 @@ HuichuanFlow_serving/__pycache__/
 HuichuanFlow_serving/serving/__pycache__/
 
 HuichuanFlow_serving/serving/proto/__pycache__/
+
+HuichuanFlow/trainer/__pycache__/
