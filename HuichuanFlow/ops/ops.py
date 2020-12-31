@@ -292,3 +292,80 @@ class Convolve(Operator):
             raise Exception("You're not my father")
 
         return np.mat(jacobi)
+
+
+class ScalarMultiply(Operator):
+    """
+    用标量（1x1矩阵）数乘一个矩阵
+    """
+
+    def compute(self):
+        assert self.parents[0].shape() == (1, 1)  # 第一个父节点是标量
+        self.value = np.multiply(self.parents[0].value, self.parents[1].value)
+
+    def get_jacobi(self, parent):
+
+        assert parent in self.parents
+
+        if parent is self.parents[0]:
+            return self.parents[1].value.flatten().T
+        else:
+            return np.mat(np.eye(self.parents[1].dimension())) * self.parents[0].value[0, 0]
+
+
+class MaxPooling(Operator):
+    """
+    最大值池化
+    """
+
+    def __init__(self, *parent, **kargs):
+        Operator.__init__(self, *parent, **kargs)
+
+        self.stride = kargs.get('stride')
+        assert self.stride is not None
+        self.stride = tuple(self.stride)
+        assert isinstance(self.stride, tuple) and len(self.stride) == 2
+
+        self.size = kargs.get('size')
+        assert self.size is not None
+        self.size = tuple(self.size)
+        assert isinstance(self.size, tuple) and len(self.size) == 2
+
+        self.flag = None
+
+    def compute(self):
+        data = self.parents[0].value  # 输入特征图
+        w, h = data.shape  # 输入特征图的宽和高
+        dim = w * h
+        sw, sh = self.stride
+        kw, kh = self.size  # 池化核尺寸
+        hkw, hkh = int(kw / 2), int(kh / 2)  # 池化核长宽的一半
+
+        result = []
+        flag = []
+        for i in np.arange(0, w, sw):
+            row = []
+            for j in np.arange(0, h, sh):
+                # 取池化窗口中的最大值
+                top, bottom = max(0, i - hkw), min(w, i + hkw + 1)
+                left, right = max(0, j - hkh), min(h, j + hkh + 1)
+                window = data[top:bottom, left:right]
+                row.append(
+                    np.max(window)
+                )
+
+                pos = np.argmax(window)
+                w_width = right - left
+                offset_w, offset_h = top + pos // w_width, left + pos % w_width
+                offset = offset_w * w + offset_h
+                tmp = np.zeros(dim)
+                tmp[offset] = 1
+                flag.append(tmp)
+            result.append(row)
+        self.flag = np.mat(flag)
+        self.value = np.mat(result)
+
+    def get_jacobi(self, parent):
+
+        assert parent is self.parents[0] and self.jacobi is not None
+        return self.flag
